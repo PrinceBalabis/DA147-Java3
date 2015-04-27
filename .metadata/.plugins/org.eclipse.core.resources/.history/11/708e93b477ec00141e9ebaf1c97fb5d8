@@ -55,17 +55,10 @@ public class Employee {
 		System.out.println();
 		System.out.println(e1.getName()+ " har anställning hos " + 
 				e1.getEmployer() + " med lönen " + e1.getWage() + ".");
-		System.out.println("Årslön: "+ e1.yearlyWage()+", Same employer?: "+e1.compareEmployer(e2));
-		System.out.println();
-
+		System.out.println("Yearly wage: "+ e1.yearlyWage()+", Same employer?: "+e1.compareEmployer(e2));
 		System.out.println(e2.getName()+ " har anställning hos " + 
 				e2.getEmployer() + " med lönen " + e2.getWage() + ".");
-		System.out.println("Årslön: "+ e2.yearlyWage()+", Same employer?: "+e2.compareEmployer(e1));
-		System.out.println();
 
-		// Test compareEmployer
-		e1.setEmployer("Malmö högskola");
-		System.out.println("Same employer?: "+e2.compareEmployer(e1));
 	}
 }
 

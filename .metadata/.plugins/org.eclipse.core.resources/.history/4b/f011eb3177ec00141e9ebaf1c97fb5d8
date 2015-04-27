@@ -1,0 +1,64 @@
+package laboration1a;
+
+public class Employee {
+	private String name;
+	private String employer;
+	private double wage;
+
+	public void setName(String name){
+		this.name = name;
+	}
+
+	public void setEmployer(String employer){
+		this.employer = employer;
+	}
+
+	public void setWage(double wage){
+		this.wage = wage;
+	}
+
+	public String getName(){
+		return this.name;
+	}
+
+	public String getEmployer(){
+		return this.employer;
+	}
+
+	public double getWage(){
+		return this.wage;
+	}
+
+	public double yearlyWage(){
+
+	}
+
+	public boolean compareEmployer(Employee e){
+		if(this.employer.equals(e){
+			return true;
+		}
+		else return false;
+	}
+}
+
+public static void main(String[] args){
+	// Den första anställda skapas
+	Employee e1=new Employee();
+	e1.setName("Anna Olsson");
+	e1.setEmployer("Eriksson");
+	e1.setWage(25700);
+	// Den andra anställda skapas
+	Employee e2=new Employee();
+	e2.setName("Pontus Persson");
+	e2.setEmployer("Malmö högskola");
+	e2.setWage(23900);
+	//De anställda skrivs ut
+	System.out.println();
+	System.out.println(e1.getName()+ " har anställning hos " + 
+			e1.getEmployer() + " med lönen " + e1.getWage() + ".");
+	System.out.println(e2.getName()+ " har anställning hos " + 
+			e2.getEmployer() + " med lönen " + e2.getWage() + ".");
+
+}
+}
+
