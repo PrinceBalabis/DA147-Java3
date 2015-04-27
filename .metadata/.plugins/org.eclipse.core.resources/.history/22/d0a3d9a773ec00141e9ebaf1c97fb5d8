@@ -1,0 +1,25 @@
+package laboration1a;
+
+public class House {
+
+	private double area;
+	private int nbrOfRooms;
+	
+	public void setArea(double area) {
+		this.area = area;
+	}
+
+	public void setNbrOfRooms(int nbrOfRooms) {
+		this.nbrOfRooms = nbrOfRooms;
+	}
+	
+	public double getArea() {
+		return area;
+	}
+	
+	public int getNbrOfRooms() {
+		return nbrOfRooms;
+	}
+	
+
+}

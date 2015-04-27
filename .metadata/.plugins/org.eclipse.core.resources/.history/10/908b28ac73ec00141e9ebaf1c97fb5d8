@@ -23,7 +23,6 @@ public class House {
 
 	public String toString(){
 		String stringToReturn = "Bostad med ytan "+ getArea() +" m2 och "+ getNbrOfRooms() +" rum.";
-		return stringToReturn;
 	}
 
 	public static void main(String[] args){
@@ -37,5 +36,7 @@ public class House {
 		System.out.println("Yta: " + house2.getArea() + " m2" +
 				"  Antal rum: " + house2.getNbrOfRooms());
 	}
+
+}
 
 }
