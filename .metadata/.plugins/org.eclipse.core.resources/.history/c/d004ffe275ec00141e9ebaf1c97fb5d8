@@ -1,0 +1,41 @@
+package laboration1a;
+
+public class Book {
+
+	private String name;
+	private String author;
+	private int nbrOfPages;
+	
+	public String getName() {
+		return name;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public int getNbrOfPages() {
+		return nbrOfPages;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public void setNbrOfPages(int nbrOfPages) {
+		this.nbrOfPages = nbrOfPages;
+	}
+	
+	public String toString(){
+		String stringToReturn = getName() +" - "+getAuthor()+", "+getNbrOfPages()+" pages";
+	}
+	
+	public static void main(String[] args) {
+
+	}
+
+}
