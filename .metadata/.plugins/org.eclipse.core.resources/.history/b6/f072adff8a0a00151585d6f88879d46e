@@ -21,7 +21,7 @@ public class SimpleDice implements Dice{
 
 	@Override
 	public int getSides() {
-		return sides+1;
+		return sides;
 	}
 	
 	// Test of this class

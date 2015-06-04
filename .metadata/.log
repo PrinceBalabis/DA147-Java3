@@ -250,3 +250,6 @@ org.eclipse.recommenders.utils.Logs$LogTraceException
 
 !ENTRY org.eclipse.jdt.launching 4 107 2015-06-04 09:14:42.900
 !MESSAGE Launch configuration StartP1 (1) references non-existing project test.
+
+!ENTRY org.eclipse.jdt.launching 4 107 2015-06-04 09:24:49.327
+!MESSAGE Launch configuration StartP1 (1) references non-existing project test.
