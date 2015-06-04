@@ -1,0 +1,32 @@
+package p2;
+
+public class SimpleDice implements Dice{
+	private int sides;
+	
+	public SimpleDice(){
+		sides = 6;
+		
+	}
+	
+	public SimpleDice(int sides){
+		if(sides < 1)
+				throw new NegativeSidesException();
+		this.sides = sides;
+	}
+	
+	@Override
+	public int throwDice() {
+		return (int)(Math.random()*sides);
+	}
+
+	@Override
+	public int getSides() {
+		return sides;
+	}
+
+	
+	public static void main(String[] args){
+		SimpleDice simpledice = new SimpleDice();
+		System.out.println(simpledice.throwDice());
+	}
+}

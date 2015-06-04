@@ -1,0 +1,45 @@
+package p2;
+
+public class SimpleDice implements Dice{
+	private int sides;
+	
+	public SimpleDice(){
+		sides = 6;
+		
+	}
+	
+	public SimpleDice(int sides){
+		if(sides < 1)
+				throw new NegativeSidesException(sides);
+		this.sides = sides;
+	}
+	
+	@Override
+	public int throwDice() {
+		return (int)(Math.random()*sides+1);
+	}
+
+	@Override
+	public int getSides() {
+		return sides;
+	}
+	
+	/**
+	 * NegativeSidesException class.
+	 */
+	class NegativeSidesException extends Exception
+	{
+	  public NegativeSidesException(int sides)
+	  {
+	    super("1"+sides);
+	  }
+	}
+	
+	// Test of this class
+	public static void main(String[] args){
+		SimpleDice simpledice = new SimpleDice();
+		System.out.println(simpledice.throwDice());
+	}
+	
+
+}

@@ -1,0 +1,26 @@
+package p2;
+
+public class SimpleDice implements Dice{
+	private int sides;
+	
+	public SimpleDice(){
+		
+	}
+	
+	public SimpleDice(int sides){
+		
+	}
+	
+	@Override
+	public int throwDice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSides() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

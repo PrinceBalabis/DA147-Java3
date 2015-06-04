@@ -1,0 +1,42 @@
+package p2;
+
+public class SimpleDice implements Dice{
+	private int sides;
+	
+	public SimpleDice(){
+		sides = 6;
+		
+	}
+	
+	public SimpleDice(int sides){
+		if(sides < 1)
+			try {
+				throw new NegativeSidesException();
+			} catch (NegativeSidesException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		this.sides = sides;
+	}
+	
+	@Override
+	public int throwDice() {
+		return (int)Math.random()*sides;
+	}
+
+	@Override
+	public int getSides() {
+		return sides;
+	}
+
+	/**
+	 * NegativeSidesException class.
+	 */
+	class NegativeSidesException extends Exception
+	{
+	  public NegativeSidesException()
+	  {
+	    super("Dice has to have at least 1 side");
+	  }
+	}
+}
