@@ -1,0 +1,22 @@
+package p1;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+
+public class Input {
+	private Controller controller;
+	
+	public Input(Controller controller){
+		this.controller = controller;
+		
+		JFrame frame = new JFrame(title);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(scroll, BorderLayout.CENTER);
+		frame.pack();
+		frame.setVisible(true);
+
+	}
+}

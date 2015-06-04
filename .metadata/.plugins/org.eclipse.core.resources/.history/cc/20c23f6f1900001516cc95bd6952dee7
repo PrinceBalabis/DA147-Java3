@@ -1,0 +1,9 @@
+import gui.HuvudFrame;
+
+public class main {
+
+	public static main(String[] args) {
+        new HuvudFrame("Projekt");
+	}
+
+}

@@ -1,0 +1,28 @@
+package p1;
+
+public class Book {
+	private String title;
+	private String author;
+	private String isbn;
+	
+	public Book(String title, String author, String isbn){
+		
+	}
+	
+	public String getTitle(){
+	}
+	
+	public String getAuthor(){
+	}
+	
+	public String getIsbn(){
+	}
+	
+	public String toString(){
+	}
+	
+	public int compareTo(Object object){
+		
+	}
+	
+}
