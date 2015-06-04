@@ -1,0 +1,10 @@
+package p2;
+
+public class OrdinaryPlayer extends Player{
+
+	
+	
+	public static void main(String[] args) {
+	}
+
+}

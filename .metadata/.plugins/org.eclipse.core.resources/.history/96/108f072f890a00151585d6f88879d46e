@@ -1,0 +1,23 @@
+package p2;
+
+public class OrdinaryPlayer extends Player{
+	private Dice dice;
+	
+	public OrdinaryPlayer(String name) {
+		super(name);
+	}
+
+	public OrdinaryPlayer(String name, Dice dice) {
+		super(name);
+		this.dice = dice;
+	}
+	
+	@Override
+	public int throwDice() {
+		return 0;
+	}
+
+	public static void main(String[] args) {
+		
+	}
+}

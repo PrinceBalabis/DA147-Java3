@@ -1,0 +1,18 @@
+package p2;
+
+public class OrdinaryPlayer extends Player{
+	
+	public OrdinaryPlayer(String name) {
+		super(name);
+	}
+
+
+	@Override
+	public int throwDice() {
+		return 0;
+	}
+
+	public static void main(String[] args) {
+		
+	}
+}
