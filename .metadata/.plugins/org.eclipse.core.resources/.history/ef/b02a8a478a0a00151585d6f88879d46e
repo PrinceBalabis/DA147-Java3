@@ -1,9 +1,0 @@
-package p2;
-
-public class TestDice {
-	
-	public static void test( Dice dice, int nbrOfThrows){
-		int[] res = new int[dice.getSides()];
-		
-	}
-}
