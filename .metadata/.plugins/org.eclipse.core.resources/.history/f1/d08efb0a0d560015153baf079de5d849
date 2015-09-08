@@ -1,0 +1,30 @@
+package model;
+
+import java.util.ArrayList;
+
+import controller.DatabasKomController;
+
+public class DatabasModell {
+
+	ArrayList<Kategori> kategoriList = new ArrayList<Kategori>();
+	ArrayList<Kund> kundList = new ArrayList<Kund>();
+	ArrayList<Vara> varaList = new ArrayList<Vara>();
+	
+	public DatabasModell(){
+		System.out.println("Startade DatabasModell");
+	}
+	
+	public void addKategori(int kategoriID, String namn){
+		kategoriList.add(new Kategori(kategoriID, namn));
+	}
+	
+	public void addKund(String namn, String address, String anvandarnamn, String losenord, float personnummer,
+			float telefonnummer){
+		kundList.add(new Kund(namn, address, anvandarnamn, losenord, personnummer, telefonnummer));
+	}
+	
+	public void addVara(String namn, int varuID, int kategoriID, float antal, float pris, float betyg){
+		
+	}
+	
+}

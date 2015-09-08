@@ -1,0 +1,18 @@
+package model;
+
+public class Kund {
+	
+	private String namn, anvandarnamn, losenord;
+	private float personnummer, telefonnummer;
+	
+	public Kund(String namn, String anvandarnamn, String losenord, float personnummer, float telefonnummer) {
+		super();
+		this.namn = namn;
+		this.anvandarnamn = anvandarnamn;
+		this.losenord = losenord;
+		this.personnummer = personnummer;
+		this.telefonnummer = telefonnummer;
+	}
+	
+	
+}

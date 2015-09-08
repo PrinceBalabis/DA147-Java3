@@ -1,0 +1,8 @@
+package model;
+
+public class Vara {
+	private String namn;
+	private int varuID, kategoriID;
+	private float antal, pris, betyg;
+	
+}

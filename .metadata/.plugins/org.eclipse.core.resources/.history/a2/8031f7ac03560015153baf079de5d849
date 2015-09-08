@@ -1,0 +1,15 @@
+package model;
+
+public class Vara {
+private String varuID, namn, kategoriID, antal, pris, betyg;
+
+public Vara(String varuID, String namn, String kategoriID, String antal, String pris, String betyg) {
+	this.varuID = varuID;
+	this.namn = namn;
+	this.kategoriID = kategoriID;
+	this.antal = antal;
+	this.pris = pris;
+	this.betyg = betyg;
+}
+
+}

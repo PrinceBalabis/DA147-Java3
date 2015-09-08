@@ -1,0 +1,21 @@
+package controller;
+
+import gui.HuvudFrame;
+import model.DatabasModell;
+
+public class HuvudController {
+
+	private DatabasKomController databasKomController;
+	
+	public HuvudController() {
+		// Starta Databas kommunikationen
+		databasKomController = new DatabasKomController();
+		
+		// Starta GUI-tråden
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new HuvudFrame("Projekt");
+			}
+		});
+	}
+}

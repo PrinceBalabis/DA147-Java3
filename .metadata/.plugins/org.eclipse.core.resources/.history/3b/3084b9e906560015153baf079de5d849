@@ -1,0 +1,63 @@
+package model;
+
+public class Vara {
+	private String varuID, namn, kategoriID, antal, pris, betyg;
+
+	public Vara(String varuID, String namn, String kategoriID, String antal, String pris, String betyg) {
+		this.varuID = varuID;
+		this.namn = namn;
+		this.kategoriID = kategoriID;
+		this.antal = antal;
+		this.pris = pris;
+		this.betyg = betyg;
+	}
+
+	public String getVaruID() {
+		return varuID;
+	}
+
+	public void setVaruID(String varuID) {
+		this.varuID = varuID;
+	}
+
+	public String getNamn() {
+		return namn;
+	}
+
+	public void setNamn(String namn) {
+		this.namn = namn;
+	}
+
+	public String getKategoriID() {
+		return kategoriID;
+	}
+
+	public void setKategoriID(String kategoriID) {
+		this.kategoriID = kategoriID;
+	}
+
+	public String getAntal() {
+		return antal;
+	}
+
+	public void setAntal(String antal) {
+		this.antal = antal;
+	}
+
+	public String getPris() {
+		return pris;
+	}
+
+	public void setPris(String pris) {
+		this.pris = pris;
+	}
+
+	public String getBetyg() {
+		return betyg;
+	}
+
+	public void setBetyg(String betyg) {
+		this.betyg = betyg;
+	}
+
+}

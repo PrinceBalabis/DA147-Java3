@@ -16,7 +16,9 @@ import javax.swing.border.TitledBorder;
 
 public class HuvudFrame extends JFrame{
 
-	public HuvudFrame(String title){
+	JButton registreraButton, loggaInButton;
+
+	public HuvudFrame(String title, String[] kategoriNamnArray, String[] varaNamnArray){
 		super(title);
 		System.out.println("Startade Huvudrutan(GUI)-tråden");
 		setSize(400, 270);
@@ -37,13 +39,13 @@ public class HuvudFrame extends JFrame{
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
-		add(new KategoriPanel(), c);
+		add(new KategoriPanel(kategoriNamnArray), c);
 
 		c.weightx = 0.5;
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 1;
-		add(new VaruPanel(), c);
+		add(new VaruPanel(varaNamnArray), c);
 
 		c.weightx = 0.5;
 		c.gridx = 0;
@@ -66,32 +68,25 @@ public class HuvudFrame extends JFrame{
 			setBorder(title);
 
 			//Buttons
-			JButton registreraButton = new JButton("Registrera");
-			JButton loggaInButton = new JButton("Logga in");
+			registreraButton = new JButton("Registrera");
+			loggaInButton = new JButton("Logga in");
 			add(registreraButton);
-			registreraButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("You clicked the Registrera button");
-					new RegistreringsFrame();
-				}
-
-			});
 			add(loggaInButton);
-			loggaInButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("You clicked the Logga In button");
-					new InloggningsFrame();
-				}
-
-			});
 		}
+	}
+
+	/**
+	 * Lägg till listener från HuvudController. Så att alla events går direkt till HuvudController
+	 * @param listener ACtionListener klassen i HuvudController
+	 */
+	public void addGUIListener(ActionListener l){
+		registreraButton.addActionListener(l);
+		loggaInButton.addActionListener(l);
 	}
 
 	private class KategoriPanel extends JPanel{
 
-		public KategoriPanel(){
+		public KategoriPanel(String[] kategoriNamnArray){
 			setSize(400, 50);
 
 			//Title border
@@ -100,9 +95,9 @@ public class HuvudFrame extends JFrame{
 			setBorder(title);
 
 			//Combobox
-			String[] kategoriStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
-			JComboBox kategoriList = new JComboBox(kategoriStrings);
-			kategoriList.setSelectedIndex(4);
+			//String[] kategoriStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
+			JComboBox kategoriList = new JComboBox(kategoriNamnArray);
+			kategoriList.setSelectedIndex(0); // Välj första kategorin i listan för att synka med vara-listan
 			add(kategoriList);
 			//petList.addActionListener(this);
 		}
@@ -110,7 +105,7 @@ public class HuvudFrame extends JFrame{
 
 	private class VaruPanel extends JPanel{
 
-		public VaruPanel(){
+		public VaruPanel(String[] VaraNamnArray){
 			setSize(400, 50);
 
 			//Title border
@@ -119,9 +114,8 @@ public class HuvudFrame extends JFrame{
 			setBorder(title);
 
 			//Combobox
-			String[] VaruStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
-			JComboBox VaruList = new JComboBox(VaruStrings);
-			VaruList.setSelectedIndex(4);
+			JComboBox VaruList = new JComboBox(VaraNamnArray);
+			VaruList.setSelectedIndex(0);
 			add(VaruList);
 			//petList.addActionListener(this);
 		}

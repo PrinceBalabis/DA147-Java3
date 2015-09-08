@@ -1,0 +1,14 @@
+package model;
+
+import controller.DatabasKomController;
+
+public class DatabasModell {
+	private DatabasKomController databasKomController;
+	
+	public DatabasModell(){
+		System.out.println("Startade DatabasModell");
+		// Starta Databas kommunikationen
+		databasKomController = new DatabasKomController();
+	}
+	
+}

@@ -1,0 +1,7 @@
+package model;
+
+public class Kategori {
+	private int kategoriID
+	private String kategoriID, namn;
+
+}

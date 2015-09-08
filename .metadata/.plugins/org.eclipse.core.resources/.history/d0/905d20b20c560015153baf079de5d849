@@ -1,0 +1,19 @@
+package model;
+
+import java.util.ArrayList;
+
+import controller.DatabasKomController;
+
+public class DatabasModell {
+
+	ArrayList<Kategori> kategoriList = new ArrayList<Kategori>();
+	ArrayList<Kund> kundList = new ArrayList<Kund>();
+	ArrayList<Vara> varaList = new ArrayList<Vara>();
+	
+	public DatabasModell(){
+		System.out.println("Startade DatabasModell");
+		
+
+	}
+	
+}

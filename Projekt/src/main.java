@@ -1,4 +1,6 @@
+import controller.DatabasKomController;
 import controller.HuvudController;
+import gui.HuvudFrame;
 
 public class main {
 
