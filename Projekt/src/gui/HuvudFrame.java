@@ -18,6 +18,7 @@ public class HuvudFrame extends JFrame{
 
 	public HuvudFrame(String title){
 		super(title);
+		System.out.println("Startade Huvudrutan(GUI)-tråden");
 		setSize(400, 270);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );

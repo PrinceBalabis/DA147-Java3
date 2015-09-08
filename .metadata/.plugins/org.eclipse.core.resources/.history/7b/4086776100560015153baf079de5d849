@@ -1,0 +1,12 @@
+import gui.HuvudFrame;
+
+public class main {
+
+	public static void main(String[] args) {
+		new Runnable() {
+			public void run() {
+				new HuvudController();
+			}
+		};
+	}
+}

@@ -1,0 +1,12 @@
+package mysql;
+
+public class testingConnection {
+
+	public static void main(String[] args) {
+
+        String url = "jdbc:mysql://178.62.216.84:3306/da147a_project";
+        String user = "testuser";
+        String password = "test623";
+	}
+
+}

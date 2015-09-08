@@ -1,0 +1,15 @@
+package controller;
+
+public class DatabasKomController implements Runnable{
+
+	public DatabasKomController(){
+		(new Thread(this)).start(); // Starta "run()"-funktionen i ny tråd
+	}
+
+	@Override
+	public void run() {
+		System.out.println("Startade DatabasKomController-tråden");
+		
+	}
+
+}

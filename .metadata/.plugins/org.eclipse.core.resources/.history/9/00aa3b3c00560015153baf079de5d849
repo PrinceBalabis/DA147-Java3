@@ -1,0 +1,15 @@
+package controller;
+
+import gui.HuvudFrame;
+
+public class HuvudController {
+
+	public HuvudController(){
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new HuvudFrame("Projekt");
+			}
+		});
+	}
+	
+}

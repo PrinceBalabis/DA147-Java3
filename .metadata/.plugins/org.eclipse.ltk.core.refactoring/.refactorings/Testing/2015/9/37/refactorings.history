@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;mysql.testingConnection.java&apos; to &apos;TestConnection.java&apos;&#x0D;&#x0A;- Original project: &apos;Testing&apos;&#x0D;&#x0A;- Original element: &apos;mysql.testingConnection.java&apos;&#x0D;&#x0A;- Renamed element: &apos;mysql.TestConnection.java&apos;" description="Rename compilation unit &apos;testingConnection.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;mysql{testingConnection.java" name="TestConnection.java" references="false" stamp="1441697348070" version="1.0"/>
+</session>
