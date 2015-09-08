@@ -1,0 +1,29 @@
+package p2;
+
+public class Cheater extends Player{
+	private PredictableDice predictableDice;
+
+	public Cheater(String name) {
+		super(name);
+		predictableDice = new PredictableDice();
+	}
+
+	public Cheater(String name, Dice dice) {
+		super(name);
+		predictableDice = new PredictableDice(dice.getSides());
+	}
+
+	@Override
+	public int throwDice() {
+		return predictableDice.throwDice();
+	}
+
+	public void setDice(Dice dice) {
+		predictableDice = new PredictableDice(dice.getSides());;
+	}
+	
+	public Dice getDice() {
+		Dice tempDice = new SimpleDice(predictableDice.getSides());
+		return tempDice;
+	}
+}

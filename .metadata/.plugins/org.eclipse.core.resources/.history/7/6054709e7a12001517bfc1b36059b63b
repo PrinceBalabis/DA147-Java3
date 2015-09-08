@@ -1,0 +1,46 @@
+package p2;
+
+public class Cheater extends Player{
+	private Dice dice;
+
+	public Cheater(String name) {
+		super(name);
+		dice = new SimpleDice();
+	}
+
+	public Cheater(String name, Dice dice) {
+		super(name);
+		this.dice = dice;
+	}
+
+	@Override
+	public int throwDice() {
+		int sideThrown = dice.throwDice();
+		//if(sideThrown != dice.getSides()){
+			sideThrown += (int)(Math.random()*2); // Hälften av gångerna som tärningen är kastad och prickarna är inte högst, läggs en extra prick till.
+		//}
+		return sideThrown;
+	}
+
+	public void setDice(Dice dice) {
+		this.dice = dice;
+	}
+
+	public Dice getDice() {
+		return dice;
+	}
+
+	public static void main(String[] args) {
+		Player player1 = new OrdinaryPlayer( "Viktor",new SimpleDice(6) );
+		Player player2 = new Cheater( "Signe", new SimpleDice(6) );
+		Game game = new Game( player1, player2 );
+		System.out.println( "\nResultatet av tio spel" );
+		for( int i=0; i<10; i++ )
+			game.play( false );
+		
+		Cheater player3 = new Cheater( "TEST", new SimpleDice(6) );
+		System.out.println(player3.getDice().getSides());
+	
+	}
+
+}

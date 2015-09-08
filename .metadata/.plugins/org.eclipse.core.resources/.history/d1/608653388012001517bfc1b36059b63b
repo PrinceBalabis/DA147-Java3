@@ -1,0 +1,42 @@
+package p2;
+
+/**
+ * Klassen ärver Player. 
+ * En typisk spelare i tärningsspel
+ * @author Prince Balabis, AB7271
+ */
+public class OrdinaryPlayer extends Player{
+	private Dice dice;
+	
+	public OrdinaryPlayer(String name) {
+		super(name);
+		dice = new SimpleDice();
+	}
+
+	public OrdinaryPlayer(String name, Dice dice) {
+		super(name);
+		this.dice = dice;
+	}
+	
+	@Override
+	public int throwDice() {
+		return dice.throwDice();
+	}
+
+	public void setDice(Dice dice) {
+		this.dice = dice;
+	}
+
+	public Dice getDice() {
+		return dice;
+	}
+	
+
+	public static void main(String[] args) {
+		SimpleDice dice = new SimpleDice( 6 );
+		Player player1 = new OrdinaryPlayer( "Gustav", dice );
+		Player player2 = new OrdinaryPlayer( "Valborg", dice );
+		Game game = new Game( player1, player2 );
+		game.play( true );
+	}
+}
