@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
 
@@ -140,6 +139,8 @@ public class HuvudFrame extends JFrame{
 			// Vara titel
 			JTextPane varuTitle = new JTextPane();
 			varuTitle.setText("varuTitle");
+			varuTitle.setBorder(null);
+			varuTitle.setBackground(new Color(0, 0, 0, 0));
 			c.fill = GridBagConstraints.HORIZONTAL;
 			c.gridx = 0;
 			c.gridy = 0;
@@ -150,6 +151,8 @@ public class HuvudFrame extends JFrame{
 			// Vara pris
 			JTextPane varuPris = new JTextPane();
 			varuPris.setText("varuPris");
+			varuPris.setBorder(null);
+			varuPris.setBackground(new Color(0, 0, 0, 0));
 			c.fill = GridBagConstraints.HORIZONTAL;
 			c.gridx = 0;
 			c.gridy = 1;
@@ -160,6 +163,8 @@ public class HuvudFrame extends JFrame{
 			// Vara lager antal
 			JTextPane varuLager = new JTextPane();
 			varuLager.setText("varuLager");
+			varuLager.setBorder(null);
+			varuLager.setBackground(new Color(0, 0, 0, 0));
 			c.fill = GridBagConstraints.HORIZONTAL;
 			c.gridx = 0;
 			c.gridy = 2;
@@ -170,6 +175,8 @@ public class HuvudFrame extends JFrame{
 			// Vara medelbetyg
 			JTextPane varuBetyg = new JTextPane();
 			varuBetyg.setText("varuBetyg");
+			varuBetyg.setBorder(null);
+			varuBetyg.setBackground(new Color(0, 0, 0, 0));
 			c.fill = GridBagConstraints.HORIZONTAL;
 			c.gridx = 3;
 			c.gridy = 0;

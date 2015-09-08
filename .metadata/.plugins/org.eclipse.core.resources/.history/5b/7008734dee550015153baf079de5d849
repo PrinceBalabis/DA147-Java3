@@ -1,0 +1,57 @@
+package gui;
+
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+
+public class RegistreringsFrame extends JFrame{
+
+	public RegistreringsFrame(){
+		super("Registrering");
+		setSize(400, 270);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setResizable(false);
+		
+		add(new KundRegistreringsPanel());
+		
+		setVisible(true);
+	}
+
+	private class KundRegistreringsPanel extends JPanel{
+
+		public KundRegistreringsPanel(){
+			setSize(400, 50);
+			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+			
+			//Namn
+			JTextPane tpNamn = new JTextPane();
+			tpNamn.setText("varuBetyg");
+			textPaneConfig(tpNamn);
+			JTextField tfNamn = new JTextField();
+			textFieldConfig(tfNamn);
+			
+			
+		}
+		
+		private void textPaneConfig(JTextPane tp){
+			tp.setSize(300,50);
+			//tpNamn.setBorder(null);
+			//tpNamn.setBackground(new Color(0, 0, 0, 0));
+			tp.setEditable(false);
+			tp.setHighlighter(null);
+			add(tp, this);
+		}
+		
+		private void textFieldConfig(JTextField tf){
+			add(Box.createRigidArea(new Dimension(0,5)));
+			add(tf, this);
+		}
+	}
+}

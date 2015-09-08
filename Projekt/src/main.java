@@ -3,7 +3,12 @@ import gui.HuvudFrame;
 public class main {
 
 	public static void main(String[] args) {
-        new HuvudFrame("Projekt");
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new HuvudFrame("Projekt");
+			}
+		});
+
 	}
 
 }
