@@ -71,6 +71,7 @@ public class HuvudFrame extends JFrame{
 			registreraButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e)
 				{
+					//Execute when button is pressed
 					System.out.println("You clicked the Registrera button");
 					new RegistreringsFrame();
 				}
@@ -80,8 +81,9 @@ public class HuvudFrame extends JFrame{
 			loggaInButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e)
 				{
+					//Execute when button is pressed
 					System.out.println("You clicked the Logga In button");
-					new InloggningsFrame();
+					new RegistreringsFrame();
 				}
 
 			});

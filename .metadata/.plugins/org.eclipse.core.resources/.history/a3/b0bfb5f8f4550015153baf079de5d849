@@ -20,7 +20,7 @@ public class RegistreringsFrame extends JFrame{
 		super("Registrering");
 		setSize(400, 270);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+		setDefaultCloseOperation( JFrame.ABORT );
 		setResizable(false);
 		
 		add(new KundRegistreringsPanel(), BorderLayout.CENTER); // Lägg till Panelen med textfält
@@ -75,7 +75,7 @@ public class RegistreringsFrame extends JFrame{
 			JTextField tfAnvandarnamn = new JTextField();
 			textFieldInit(tfAnvandarnamn);
 			
-			//Lösenord
+			//Användarnamn
 			JTextPane tpLosenord = new JTextPane();
 			tpLosenord.setText("Lösenord");
 			textPaneInit(tpLosenord);

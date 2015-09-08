@@ -75,7 +75,7 @@ public class RegistreringsFrame extends JFrame{
 			JTextField tfAnvandarnamn = new JTextField();
 			textFieldInit(tfAnvandarnamn);
 			
-			//Lösenord
+			//Användarnamn
 			JTextPane tpLosenord = new JTextPane();
 			tpLosenord.setText("Lösenord");
 			textPaneInit(tpLosenord);

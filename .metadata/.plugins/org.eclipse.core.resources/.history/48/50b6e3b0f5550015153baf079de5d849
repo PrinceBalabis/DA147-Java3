@@ -68,20 +68,13 @@ public class HuvudFrame extends JFrame{
 			JButton registreraButton = new JButton("Registrera");
 			JButton loggaInButton = new JButton("Logga in");
 			add(registreraButton);
+			add(loggaInButton);
 			registreraButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e)
 				{
+					//Execute when button is pressed
 					System.out.println("You clicked the Registrera button");
 					new RegistreringsFrame();
-				}
-
-			});
-			add(loggaInButton);
-			loggaInButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("You clicked the Logga In button");
-					new InloggningsFrame();
 				}
 
 			});
