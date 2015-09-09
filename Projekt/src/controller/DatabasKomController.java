@@ -17,7 +17,7 @@ public class DatabasKomController {
 	private String url = "jdbc:mysql://178.62.216.84:3306/da147a_project";
 	private String user = "da147a_project_u";
 	private String password = "da147a_project_p";
-	
+
 	public DatabasKomController() {
 		System.out.println("Startade DatabasKomController");
 
@@ -31,19 +31,92 @@ public class DatabasKomController {
 		// Hämta varorna från MySQL databasen
 		getVaraFromDatabase();
 	}
-	
-	public String[] getKategoriNamn(){
+
+	public String[] getKategoriNamn() {
 		return databasModell.getKategoriNamn();
 	}
-	
-	public String[] getVaraNamn(int kategoriID){
+
+	public String[] getVaraNamn(int kategoriID) {
 		return databasModell.getVaraNamn(kategoriID);
 	}
-	
+
+	public String[] getVaraNamn(String kategoriNamn) {
+		return databasModell.getVaraNamn(kategoriNamn);
+	}
+
+	public String[] getVaraDetaljer(int varaID) {
+		return databasModell.getVaradetaljer(varaID);
+	}
+
+	public String[] getVaraDetaljer(String varaNamn) {
+		return databasModell.getVaradetaljer(varaNamn);
+	}
+
 	/**
-	 * Hämtar listan med kategorier från MySQl databasen och lagrar lokalt i DatabasModell
+	 * Kallas för att registrera ny kund kolla om användaren redan existerar
+	 * 
+	 * @return true om kunden lyckades registrera, false om personnumret eller
+	 *         användarnamnet redan existerar!
 	 */
-	private void getKategoriFromDatabase(){
+	public boolean registreraKund(String[] kundInformation) {
+
+		String namn = kundInformation[1];
+		String personnummer = kundInformation[2];
+		String adress = kundInformation[3];
+		String telefonnummer = kundInformation[4];
+		String anvandarnamn = kundInformation[5];
+		String losenord = kundInformation[6];
+
+		ResultSet rs = null;
+		Connection con = null;
+		Statement st = null;
+
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			st = con.createStatement();
+
+			// Kolla om peronnumret redan existerar!
+			rs = st.executeQuery("SELECT * FROM `Kund` WHERE `personnummer` LIKE '" + personnummer + "'");
+			if (rs.next()) {
+				System.out.println("Personnummer existerar redan i databasen!");
+				return false;
+			} else {
+				System.out.println("Personnummer finns inte redan med i databasen!!");
+			}
+
+			// Lägg till kunden i databasen!
+			st.executeUpdate(
+					"INSERT INTO `da147a_project`.`Kund` (`namn`, `personnummer`, `address`, `telefonnummer`, `anvandarnamn`, `losenord`) VALUES ('"
+							+ namn + "', '" + personnummer + "', '" + adress + "', '" + telefonnummer + "', '"
+							+ anvandarnamn + "', '" + losenord + "');");
+
+		} catch (SQLException ex) {
+			Logger lgr = Logger.getLogger(DatabasKomController.class.getName());
+			lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+		} finally {
+			try {
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+
+			} catch (SQLException ex) {
+				Logger lgr = Logger.getLogger(DatabasKomController.class.getName());
+				lgr.log(Level.WARNING, ex.getMessage(), ex);
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Hämtar listan med kategorier från MySQl databasen och lagrar lokalt i
+	 * DatabasModell
+	 */
+	private void getKategoriFromDatabase() {
 		ResultSet rs = null;
 		Connection con = null;
 		Statement st = null;
@@ -59,7 +132,7 @@ public class DatabasKomController {
 				databasModell.addKategori(kategoriID, namn);
 				System.out.println("Lade till kategori; ID: " + kategoriID + ", Namn: " + namn);
 			}
-			
+
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabasKomController.class.getName());
 			lgr.log(Level.SEVERE, ex.getMessage(), ex);
@@ -79,11 +152,12 @@ public class DatabasKomController {
 			}
 		}
 	}
-	
+
 	/**
-	 * Hämtar listan med kunder från MySQl databasen och lagrar lokalt i DatabasModell
+	 * Hämtar listan med kunder från MySQl databasen och lagrar lokalt i
+	 * DatabasModell
 	 */
-	private void getKundFromDatabase(){
+	private void getKundFromDatabase() {
 		ResultSet rs = null;
 		Connection con = null;
 		Statement st = null;
@@ -98,12 +172,13 @@ public class DatabasKomController {
 				String address = rs.getString("address");
 				String anvandarnamn = rs.getString("anvandarnamn");
 				String losenord = rs.getString("losenord");
-				float personnummer = rs.getFloat("personnummer");
-				float telefonnummer = rs.getFloat("telefonnummer");
+				double personnummer = rs.getFloat("personnummer");
+				double telefonnummer = rs.getFloat("telefonnummer");
 				databasModell.addKund(namn, address, anvandarnamn, losenord, personnummer, telefonnummer);
-				System.out.println("Lade till kund; "+namn+", "+address+", "+anvandarnamn+", "+losenord+", "+personnummer+", "+telefonnummer);
+				System.out.println("Lade till kund; " + namn + ", " + address + ", " + anvandarnamn + ", " + losenord
+						+ ", " + personnummer + ", " + telefonnummer);
 			}
-			
+
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabasKomController.class.getName());
 			lgr.log(Level.SEVERE, ex.getMessage(), ex);
@@ -123,11 +198,12 @@ public class DatabasKomController {
 			}
 		}
 	}
-	
+
 	/**
-	 * Hämtar listan med varor från MySQl databasen och lagrar lokalt i DatabasModell
+	 * Hämtar listan med varor från MySQl databasen och lagrar lokalt i
+	 * DatabasModell
 	 */
-	private void getVaraFromDatabase(){
+	private void getVaraFromDatabase() {
 		ResultSet rs = null;
 		Connection con = null;
 		Statement st = null;
@@ -145,9 +221,10 @@ public class DatabasKomController {
 				float pris = rs.getFloat("pris");
 				float betyg = rs.getFloat("betyg");
 				databasModell.addVara(namn, varuID, kategoriID, antal, pris, betyg);
-				System.out.println("Lade till vara; "+namn+", "+varuID+", "+kategoriID+", "+antal+", "+pris+", "+betyg);
+				System.out.println("Lade till vara; " + namn + ", " + varuID + ", " + kategoriID + ", " + antal + ", "
+						+ pris + ", " + betyg);
 			}
-			
+
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabasKomController.class.getName());
 			lgr.log(Level.SEVERE, ex.getMessage(), ex);

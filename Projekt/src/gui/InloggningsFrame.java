@@ -17,7 +17,6 @@ public class InloggningsFrame extends JFrame {
 
 	public InloggningsFrame(){
 		super("Inloggning");
-		setSize(400, 270);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setResizable(false);
@@ -26,7 +25,7 @@ public class InloggningsFrame extends JFrame {
 		
 		//Lägg till "Logga in" knappen
 		JButton btnLoggaIn = new JButton();
-		btnLoggaIn.setText("Logga in");
+		btnLoggaIn.setText("Logga in.");
 		add(btnLoggaIn, BorderLayout.SOUTH);
 		
         pack();

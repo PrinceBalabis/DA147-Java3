@@ -3,10 +3,10 @@ package model;
 public class Kund {
 	
 	private String namn, address, anvandarnamn, losenord;
-	private float personnummer, telefonnummer;
+	private double personnummer, telefonnummer;
 	
-	public Kund(String namn, String address, String anvandarnamn, String losenord, float personnummer,
-			float telefonnummer) {
+	public Kund(String namn, String address, String anvandarnamn, String losenord, double personnummer,
+			double telefonnummer) {
 		super();
 		this.namn = namn;
 		this.address = address;
@@ -48,19 +48,19 @@ public class Kund {
 		this.losenord = losenord;
 	}
 
-	public float getPersonnummer() {
+	public double getPersonnummer() {
 		return personnummer;
 	}
 
-	public void setPersonnummer(float personnummer) {
+	public void setPersonnummer(double personnummer) {
 		this.personnummer = personnummer;
 	}
 
-	public float getTelefonnummer() {
+	public double getTelefonnummer() {
 		return telefonnummer;
 	}
 
-	public void setTelefonnummer(float telefonnummer) {
+	public void setTelefonnummer(double telefonnummer) {
 		this.telefonnummer = telefonnummer;
 	}
 	
