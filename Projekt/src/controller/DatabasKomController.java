@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 import model.DatabasModell;
 
 public class DatabasKomController {
@@ -52,6 +54,55 @@ public class DatabasKomController {
 		return databasModell.getVaradetaljer(varaNamn);
 	}
 
+	public boolean loggaInKund(String anvandarnamn, String losenord){
+		boolean loginSuccessful = false;
+		ResultSet rs = null;
+		Connection con = null;
+		Statement st = null;
+
+		try {
+			con = DriverManager.getConnection(url, user, password);
+			st = con.createStatement();
+
+			// Kolla om peronnumret redan existerar!
+			rs = st.executeQuery("SELECT * FROM `Kund` WHERE `anvandarnamn` LIKE '" + anvandarnamn + "'");
+			if (rs.next()) {
+				System.out.println("Användarnamn existerar i databasen!");
+				if(rs.getString("losenord").equals(losenord)){
+					loginSuccessful = true;
+				} else {
+					System.out.println("Lösenord är fel!!");
+					JOptionPane.showMessageDialog(null, "Lösenord är fel");
+					loginSuccessful = false;
+				}
+			} else {
+				System.out.println("Användarnamn finns inte redan med i databasen!!");
+				JOptionPane.showMessageDialog(null, "Användarnamnet saknas!");
+				loginSuccessful = false;
+			}
+
+		} catch (SQLException ex) {
+			Logger lgr = Logger.getLogger(DatabasKomController.class.getName());
+			lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+		} finally {
+			try {
+				if (st != null) {
+					st.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+
+			} catch (SQLException ex) {
+				Logger lgr = Logger.getLogger(DatabasKomController.class.getName());
+				lgr.log(Level.WARNING, ex.getMessage(), ex);
+			}
+		}
+
+		return loginSuccessful;
+	}
+	
 	/**
 	 * Kallas för att registrera ny kund kolla om användaren redan existerar
 	 * 
@@ -59,7 +110,8 @@ public class DatabasKomController {
 	 *         användarnamnet redan existerar!
 	 */
 	public boolean registreraKund(String[] kundInformation) {
-
+		boolean success = false;
+		
 		String namn = kundInformation[1];
 		String personnummer = kundInformation[2];
 		String adress = kundInformation[3];
@@ -79,9 +131,10 @@ public class DatabasKomController {
 			rs = st.executeQuery("SELECT * FROM `Kund` WHERE `personnummer` LIKE '" + personnummer + "'");
 			if (rs.next()) {
 				System.out.println("Personnummer existerar redan i databasen!");
-				return false;
+				return success;
 			} else {
 				System.out.println("Personnummer finns inte redan med i databasen!!");
+				success = true;
 			}
 
 			// Lägg till kunden i databasen!
@@ -109,7 +162,7 @@ public class DatabasKomController {
 			}
 		}
 
-		return true;
+		return success;
 	}
 
 	/**

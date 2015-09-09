@@ -18,6 +18,7 @@ public class HuvudController {
 	private DatabasKomController databasKomController;
 	private HuvudFrame huvudFrame;
 	private RegistreringsFrame registreringsFrame;
+	private InloggningsFrame inloggningsFrame;
 
 	public HuvudController() {
 		// Starta Databas kommunikationen
@@ -41,13 +42,17 @@ public class HuvudController {
 			System.out.println("GUI Action detected: " + ae.getActionCommand());
 
 			switch (ae.getActionCommand()) {
+			case "Logga ut": // Logga ut knappen i huvudfönstret
+				System.out.println("You clicked the Logga ut button in main window");
+				registreringsFrame = new RegistreringsFrame(this);
+				break;
 			case "Registrera": // Registrera knappen i huvudfönstret
 				System.out.println("You clicked the Registrera button in main window");
 				registreringsFrame = new RegistreringsFrame(this);
 				break;
 			case "Logga in":// Logga in knappen i huvudfönstret
 				System.out.println("You clicked the Logga In button in main window");
-				new InloggningsFrame();
+				inloggningsFrame = new InloggningsFrame(this);
 				break;
 			case "Registrera.":// Registrera knappen i registreringsrutan
 				System.out.println("You clicked the Registrera. button in Registrera window");
@@ -84,7 +89,26 @@ public class HuvudController {
 				break;
 			case "Logga in.": // Logga in knappen i logga in rutan
 				System.out.println("You clicked the Logga In button in the login window");
+				String[] loginForm = inloggningsFrame.getLoginForm();
 
+				// Kolla om formerna är giltiga
+				if (loginForm[0] != "dfg8udfg0duf" && loginForm[0] != "g7df890gh78f") {
+					System.out.println("-----------------------");
+					System.out.println("Login form:");
+					System.out.println(loginForm[0]);
+					System.out.println(loginForm[1]);
+					System.out.println("-----------------------");
+					// Kolla om de stämmer med databasen
+					boolean loggaInSuccess = databasKomController.loggaInKund(loginForm[0], loginForm[1]);
+
+					if (loggaInSuccess) {
+						JOptionPane.showMessageDialog(null, "Välkommen tillbaka " + loginForm[0] + "!");
+						System.out.println("Inloggad!");
+						// Stäng ner registrerings-rutan
+						inloggningsFrame.dispatchEvent(new WindowEvent(inloggningsFrame, WindowEvent.WINDOW_CLOSING));
+						huvudFrame.setToLoggedInKund(); // Ändra GUI till "inloggad"
+					}
+				}
 				break;
 			}
 		}

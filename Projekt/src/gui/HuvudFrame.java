@@ -21,7 +21,8 @@ public class HuvudFrame extends JFrame {
 	private JButton registreraButton, loggaInButton;
 	private JComboBox<String> kategoriList, varaList;
 	private VaraDetaljPanel varaDetaljPanel;
-
+	private KundPanel kundPanel;
+	
 	public HuvudFrame(String title, String[] kategoriNamnArray, String[] varaNamnArray, String[] varaDetaljArray,
 			ActionListener al, ItemListener kcl, ItemListener vcl) {
 		super(title);
@@ -38,7 +39,8 @@ public class HuvudFrame extends JFrame {
 		c.gridy = 0;
 		c.weightx = 0.0;
 		c.gridwidth = 2;
-		add(new KundPanel(al), c);
+		kundPanel = new KundPanel(al);
+		add(kundPanel, c);
 
 		c.weightx = 0.5;
 		c.gridx = 0;
@@ -63,6 +65,15 @@ public class HuvudFrame extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Funktionen kallas för att andra huvudfönstret till ett för inloggade kunder
+	 */
+	public void setToLoggedInKund(){
+		loggaInButton.setText("Logga ut");
+		kundPanel.remove(registreraButton); // Ta bort regisrera knappen
+	}
+	
+	
 	public void updateVaraDetaljer(String[] varaDetaljArray){
 		varaDetaljPanel.setVaraDetaljer(varaDetaljArray);
 	}
@@ -91,12 +102,16 @@ public class HuvudFrame extends JFrame {
 			setBorder(title);
 
 			// Buttons
-			registreraButton = new JButton("Registrera");
-			registreraButton.addActionListener(l);
 			loggaInButton = new JButton("Logga in");
 			loggaInButton.addActionListener(l);
-			add(registreraButton);
 			add(loggaInButton);
+			initRegistreraButton(l);
+		}
+		
+		public void initRegistreraButton(ActionListener al){
+			registreraButton = new JButton("Registrera");
+			registreraButton.addActionListener(al);
+			add(registreraButton);
 		}
 	}
 

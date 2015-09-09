@@ -4,18 +4,22 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 public class InloggningsFrame extends JFrame {
-
-	public InloggningsFrame(){
+	private JTextField tfAnvandarnamn; 
+	private JPasswordField pfLosenord;
+	
+	public InloggningsFrame(ActionListener al){
 		super("Inloggning");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
@@ -26,10 +30,26 @@ public class InloggningsFrame extends JFrame {
 		//Lägg till "Logga in" knappen
 		JButton btnLoggaIn = new JButton();
 		btnLoggaIn.setText("Logga in.");
+		btnLoggaIn.addActionListener(al);
 		add(btnLoggaIn, BorderLayout.SOUTH);
 		
         pack();
 		setVisible(true);
+	}
+	
+	public String[] getLoginForm(){
+		String anvandarnamn = tfAnvandarnamn.getText();
+		String losenord = pfLosenord.getText();
+		String[] badLoginForm = {"dfg8udfg0duf", "g7df890gh78f"};
+
+		//Kolla om informationen är giltig att skicka vidare
+		if(anvandarnamn.length() == 0 || losenord.length() == 0){
+			JOptionPane.showMessageDialog(null, "Ett av fälten är tomma!");
+			return badLoginForm;
+		}
+		
+		String[] loginForm = {anvandarnamn, losenord};
+		return loginForm;
 	}
 	
 	private class InloggningsUppgiftsPanel extends JPanel{
@@ -41,14 +61,14 @@ public class InloggningsFrame extends JFrame {
 			JTextPane tpAnvandarnamn = new JTextPane();
 			tpAnvandarnamn.setText("Användarnamn");
 			textPaneInit(tpAnvandarnamn);
-			JTextField tfAnvandarnamn = new JTextField();
+			tfAnvandarnamn = new JTextField();
 			textFieldInit(tfAnvandarnamn);
 			
 			//Lösenord
 			JTextPane tpLosenord = new JTextPane();
 			tpLosenord.setText("Lösenord");
 			textPaneInit(tpLosenord);
-			JPasswordField pfLosenord = new JPasswordField();
+			pfLosenord = new JPasswordField();
 			pfLosenord.setEchoChar('*') ;
 			pfLosenord.setPreferredSize(new Dimension(100, 20));
 			pfLosenord.setAlignmentX(Component.LEFT_ALIGNMENT);
