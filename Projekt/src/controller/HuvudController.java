@@ -44,7 +44,7 @@ public class HuvudController {
 			switch (ae.getActionCommand()) {
 			case "Logga ut": // Logga ut knappen i huvudfönstret
 				System.out.println("You clicked the Logga ut button in main window");
-				registreringsFrame = new RegistreringsFrame(this);
+
 				break;
 			case "Registrera": // Registrera knappen i huvudfönstret
 				System.out.println("You clicked the Registrera button in main window");
