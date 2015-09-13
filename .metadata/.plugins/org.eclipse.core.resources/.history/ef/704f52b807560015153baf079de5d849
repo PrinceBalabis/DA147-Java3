@@ -1,8 +1,0 @@
-package model;
-
-public class Kund {
-	
-	private String namn, address, anvandarnamn, losenord;
-	private float personnummer, telefonnummer;
-	
-}

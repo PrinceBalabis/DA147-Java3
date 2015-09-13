@@ -1,7 +1,0 @@
-package model;
-
-public class Vara {
-	private String varuID, namn, kategoriID, antal, pris, betyg;
-
-	
-}

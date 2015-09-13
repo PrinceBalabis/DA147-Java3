@@ -1,6 +1,0 @@
-package model;
-
-public class Kund {
-	private String namn, personnummer, telefonnummer, anvandarnamn, losenord;
-
-}
