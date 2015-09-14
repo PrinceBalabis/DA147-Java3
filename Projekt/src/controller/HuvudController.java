@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
+import gui.BetygssattningsFrame;
 import gui.HuvudFrame;
 import gui.InloggningsFrame;
 import gui.RegistreringsFrame;
@@ -19,11 +20,15 @@ public class HuvudController {
 	private HuvudFrame huvudFrame;
 	private RegistreringsFrame registreringsFrame;
 	private InloggningsFrame inloggningsFrame;
+	private String varaChosen;
 
 	public HuvudController() {
 		// Starta Databas kommunikationen
 		databasKomController = new DatabasKomController();
 
+		//Kom ihåg första varan
+		varaChosen = databasKomController.getVaraNamn(1)[0];
+		
 		// Starta GUI-tråden
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -44,7 +49,7 @@ public class HuvudController {
 			switch (ae.getActionCommand()) {
 			case "Logga ut": // Logga ut knappen i huvudfönstret
 				System.out.println("You clicked the Logga ut button in main window");
-
+				huvudFrame.setLoggedIn(false); // Ändra GUI till "inloggad"
 				break;
 			case "Registrera": // Registrera knappen i huvudfönstret
 				System.out.println("You clicked the Registrera button in main window");
@@ -85,7 +90,6 @@ public class HuvudController {
 				} else {
 					System.out.println("Fel på informationen skriven!");
 				}
-
 				break;
 			case "Logga in.": // Logga in knappen i logga in rutan
 				System.out.println("You clicked the Logga In button in the login window");
@@ -102,13 +106,30 @@ public class HuvudController {
 					boolean loggaInSuccess = databasKomController.loggaInKund(loginForm[0], loginForm[1]);
 
 					if (loggaInSuccess) {
-						JOptionPane.showMessageDialog(null, "Välkommen tillbaka " + loginForm[0] + "!");
+						JOptionPane.showMessageDialog(null, "Välkommen, " + loginForm[0] + "!");
 						System.out.println("Inloggad!");
 						// Stäng ner registrerings-rutan
 						inloggningsFrame.dispatchEvent(new WindowEvent(inloggningsFrame, WindowEvent.WINDOW_CLOSING));
-						huvudFrame.setToLoggedInKund(); // Ändra GUI till "inloggad"
+						huvudFrame.setLoggedIn(true); // Ändra GUI till
+														// "inloggad"
 					}
 				}
+				break;
+			case "Betygsätt": // Betygsätt knappen i huvudfönstret
+				System.out.println("You clicked the Betygsätt button in main window");
+				new BetygssattningsFrame(this);
+				break;
+			case "Gilla": // Betygsättningsknapp Gilla
+				System.out.println("You clicked the gilla betygsätt button in main window");
+				databasKomController.addBetygsattningToDatabase(databasKomController.getVaraID(varaChosen), true);
+				// Uppdatera vara detaljer
+				huvudFrame.updateVaraDetaljer(databasKomController.getVaraDetaljer(varaChosen));
+				break;
+			case "Ogilla": // Betygsättningsknapp Ogilla
+				System.out.println("You clicked the ogilla betygsätt button in main window");
+				databasKomController.addBetygsattningToDatabase(databasKomController.getVaraID(varaChosen), false);
+				// Uppdatera vara detaljer
+				huvudFrame.updateVaraDetaljer(databasKomController.getVaraDetaljer(varaChosen));
 				break;
 			}
 		}
@@ -132,8 +153,9 @@ public class HuvudController {
 	private class VaraChangeListener implements ItemListener {
 		@Override
 		public void itemStateChanged(ItemEvent ie) {
+			System.out.println("Chose a new Vara in list");
 			if (ie.getStateChange() == ItemEvent.SELECTED) {
-				String varaChosen = ie.getItem().toString();
+				varaChosen = ie.getItem().toString();
 				System.out.println("Valde vara: " + varaChosen);
 				// Uppdatera vara detaljer
 				huvudFrame.updateVaraDetaljer(databasKomController.getVaraDetaljer(varaChosen));

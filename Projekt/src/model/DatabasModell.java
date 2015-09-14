@@ -30,26 +30,36 @@ public class DatabasModell {
 		return getVaraNamn(kategoriID);
 	}
 	
-	public String[] getVaradetaljer(String varaNamn) {
+	public int getVaraID(String varaNamn){
 		int varaID = 0;
 		for (int i = 0; i < varaList.size(); i++) {
 			if (varaList.get(i).getNamn().equals(varaNamn)) {
 				varaID = varaList.get(i).getVaruID();
 			}
 		}
-		return getVaradetaljer(varaID);
+		return varaID;
+	}
+	
+	public String[] getVaradetaljer(String varaNamn) {
+		return getVaradetaljer(getVaraID(varaNamn));
 	}
 	
 	public String[] getVaradetaljer(int varaID) {
-		String[] varaDetaljer = new String[4];
+		String[] varaDetaljer = new String[5];
 		for (int i = 0; i < varaList.size(); i++) {
 			if (varaList.get(i).getVaruID() == varaID) {
 				varaDetaljer[0] = varaList.get(i).getNamn();
-				varaDetaljer[1] = String.valueOf(varaList.get(i).getBetyg());
-				varaDetaljer[2] = String.valueOf(varaList.get(i).getPris());
-				varaDetaljer[3] = String.valueOf(varaList.get(i).getAntal());
+				varaDetaljer[1] = String.valueOf(varaList.get(i).getgillaBetyg());
+				varaDetaljer[2] = String.valueOf(varaList.get(i).getoGillaBetyg());
+				varaDetaljer[3] = String.valueOf(varaList.get(i).getPris());
+				varaDetaljer[4] = String.valueOf(varaList.get(i).getAntal());
 			}
 		}
+		System.out.println("srtgdrghdrthdrtghdrghdfghdfgh");
+		System.out.println(varaDetaljer[0]);
+		System.out.println(varaDetaljer[1]);
+		System.out.println(varaDetaljer[2]);
+
 		return varaDetaljer;
 	}
 
@@ -74,8 +84,15 @@ public class DatabasModell {
 		kundList.add(new Kund(namn, address, anvandarnamn, losenord, personnummer, telefonnummer));
 	}
 
-	public void addVara(String namn, int varuID, int kategoriID, float antal, float pris, float betyg) {
-		varaList.add(new Vara(namn, varuID, kategoriID, antal, pris, betyg));
+	/**
+	 * Återstället varalist för att kunna uppdatera lokal information
+	 */
+	public void resetVaraList(){
+		varaList.clear();
+	}
+	
+	public void addVara(String namn, int varuID, int kategoriID, float antal, float pris, int gillaBetyg, int oGillaBetyg) {
+		varaList.add(new Vara(namn, varuID, kategoriID, antal, pris, gillaBetyg, oGillaBetyg));
 	}
 
 }

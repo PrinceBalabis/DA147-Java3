@@ -2,65 +2,45 @@ package model;
 
 public class Vara {
 	private String namn;
-	private int varuID, kategoriID;
-	private float antal, pris, betyg;
+	private int varuID, kategoriID, gillaBetyg, oGillaBetyg;
+	private float antal, pris;
 	
-	public Vara(String namn, int varuID, int kategoriID, float antal, float pris, float betyg) {
+	public Vara(String namn, int varuID, int kategoriID, float antal, float pris, int gillaBetyg, int oGillaBetyg) {
 		super();
 		this.namn = namn;
 		this.varuID = varuID;
 		this.kategoriID = kategoriID;
 		this.antal = antal;
 		this.pris = pris;
-		this.betyg = betyg;
+		this.gillaBetyg = gillaBetyg;
+		this.oGillaBetyg = oGillaBetyg;
 	}
 
 	public String getNamn() {
 		return namn;
 	}
 
-	public void setNamn(String namn) {
-		this.namn = namn;
-	}
-
 	public int getVaruID() {
 		return varuID;
-	}
-
-	public void setVaruID(int varuID) {
-		this.varuID = varuID;
 	}
 
 	public int getKategoriID() {
 		return kategoriID;
 	}
 
-	public void setKategoriID(int kategoriID) {
-		this.kategoriID = kategoriID;
-	}
-
 	public float getAntal() {
 		return antal;
-	}
-
-	public void setAntal(float antal) {
-		this.antal = antal;
 	}
 
 	public float getPris() {
 		return pris;
 	}
 
-	public void setPris(float pris) {
-		this.pris = pris;
-	}
-
-	public float getBetyg() {
-		return betyg;
-	}
-
-	public void setBetyg(float betyg) {
-		this.betyg = betyg;
+	public int getgillaBetyg() {
+		return gillaBetyg;
 	}
 	
+	public int getoGillaBetyg() {
+		return oGillaBetyg;
+	}
 }
