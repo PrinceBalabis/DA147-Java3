@@ -12,8 +12,14 @@ import gui.BetygssattningsFrame;
 import gui.HuvudFrame;
 import gui.InloggningsFrame;
 import gui.RegistreringsFrame;
-import model.DatabasModell;
 
+/**
+ * Startas av main-metoden. Skapar en kommunikation mellan databasen och
+ * användargränssnittet
+ * 
+ * @author Prince
+ *
+ */
 public class HuvudController {
 
 	private DatabasKomController databasKomController;
@@ -22,13 +28,16 @@ public class HuvudController {
 	private InloggningsFrame inloggningsFrame;
 	private String varaChosen;
 
+	/**
+	 * Konstruktorn som startar databaskommunikationen och användargränssnittet
+	 */
 	public HuvudController() {
 		// Starta Databas kommunikationen
 		databasKomController = new DatabasKomController();
 
-		//Kom ihåg första varan
+		// Kom ihåg första varan
 		varaChosen = databasKomController.getVaraNamn(1)[0];
-		
+
 		// Starta GUI-tråden
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -41,6 +50,12 @@ public class HuvudController {
 		});
 	}
 
+	/**
+	 * Privat klass som lyssnar på knapptryckningar i programmet
+	 * 
+	 * @author Prince
+	 *
+	 */
 	private class GUIListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
@@ -111,7 +126,7 @@ public class HuvudController {
 						// Stäng ner registrerings-rutan
 						inloggningsFrame.dispatchEvent(new WindowEvent(inloggningsFrame, WindowEvent.WINDOW_CLOSING));
 						huvudFrame.setLoggedIn(true); // Ändra GUI till
-														// "inloggad"
+						// "inloggad"
 					}
 				}
 				break;
@@ -123,18 +138,24 @@ public class HuvudController {
 				System.out.println("You clicked the gilla betygsätt button in main window");
 				databasKomController.addBetygsattningToDatabase(databasKomController.getVaraID(varaChosen), true);
 				// Uppdatera vara detaljer
-				huvudFrame.updateVaraDetaljer(databasKomController.getVaraDetaljer(varaChosen));
+				huvudFrame.setVaraDetaljer(databasKomController.getVaraDetaljer(varaChosen));
 				break;
 			case "Ogilla": // Betygsättningsknapp Ogilla
 				System.out.println("You clicked the ogilla betygsätt button in main window");
 				databasKomController.addBetygsattningToDatabase(databasKomController.getVaraID(varaChosen), false);
 				// Uppdatera vara detaljer
-				huvudFrame.updateVaraDetaljer(databasKomController.getVaraDetaljer(varaChosen));
+				huvudFrame.setVaraDetaljer(databasKomController.getVaraDetaljer(varaChosen));
 				break;
 			}
 		}
 	}
 
+	/**
+	 * Lyssnare för ändring av kategorin i listan
+	 * 
+	 * @author Prince
+	 *
+	 */
 	private class KategoriChangeListener implements ItemListener {
 		@Override
 		public void itemStateChanged(ItemEvent ie) {
@@ -145,11 +166,17 @@ public class HuvudController {
 				String[] varaList = databasKomController.getVaraNamn(kategoriChosen);
 				huvudFrame.setVaraLista(varaList);
 				// Uppdatera vara detaljer
-				huvudFrame.updateVaraDetaljer(databasKomController.getVaraDetaljer(varaList[0]));
+				huvudFrame.setVaraDetaljer(databasKomController.getVaraDetaljer(varaList[0]));
 			}
 		}
 	}
 
+	/**
+	 * Lyssnare för ändring av vara i listan
+	 * 
+	 * @author Prince
+	 *
+	 */
 	private class VaraChangeListener implements ItemListener {
 		@Override
 		public void itemStateChanged(ItemEvent ie) {
@@ -158,7 +185,7 @@ public class HuvudController {
 				varaChosen = ie.getItem().toString();
 				System.out.println("Valde vara: " + varaChosen);
 				// Uppdatera vara detaljer
-				huvudFrame.updateVaraDetaljer(databasKomController.getVaraDetaljer(varaChosen));
+				huvudFrame.setVaraDetaljer(databasKomController.getVaraDetaljer(varaChosen));
 			}
 		}
 	}

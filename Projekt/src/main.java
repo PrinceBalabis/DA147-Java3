@@ -1,7 +1,10 @@
-import controller.DatabasKomController;
 import controller.HuvudController;
-import gui.HuvudFrame;
 
+/**
+ * Main-metoden som körs vid programstart - Startar HuvudController i en ny tråd
+ * @author Prince
+ *
+ */
 public class main {
 
 	public static void main(String[] args) {

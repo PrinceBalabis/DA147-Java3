@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
 
@@ -17,6 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
 
+/**
+ * Användargränssnittet för huvudrutan
+ * 
+ * @author Prince
+ *
+ */
 public class HuvudFrame extends JFrame {
 
 	private JButton btnRegistreraButton, btnLoggaInButton, btnBetygsatt;
@@ -24,6 +29,23 @@ public class HuvudFrame extends JFrame {
 	private VaraDetaljPanel varaDetaljPanel;
 	private KundPanel kundPanel;
 
+	/**
+	 * 
+	 * @param title
+	 *            titel på huvudfönstret
+	 * @param kategoriNamnArray
+	 *            lista över namn på kategorier
+	 * @param varaNamnArray
+	 *            lista över namn på varor
+	 * @param varaDetaljArray
+	 *            vara-detaljer för första varan i listan
+	 * @param al
+	 *            ActionListener för knappar
+	 * @param kcl
+	 *            ItemListener för kategori-listan
+	 * @param vcl
+	 *            ItemListener för vara-listan
+	 */
 	public HuvudFrame(String title, String[] kategoriNamnArray, String[] varaNamnArray, String[] varaDetaljArray,
 			ActionListener al, ItemListener kcl, ItemListener vcl) {
 		super(title);
@@ -62,17 +84,20 @@ public class HuvudFrame extends JFrame {
 		c.ipady = 40;
 		varaDetaljPanel = new VaraDetaljPanel(varaDetaljArray, al);
 		add(varaDetaljPanel, c);
-		
+
 		setLoggedIn(false); // Ta bort betygsättningsknapp
 
 		setVisible(true);
 	}
 
 	/**
-	 * Funktionen kallas för att andra huvudfönstret till ett för inloggade kunder
+	 * Sätter programmet i inloggad eller utloggad state
+	 * 
+	 * @param status
+	 *            true om inloggad eller false om utloggad
 	 */
-	public void setLoggedIn(boolean status){
-		if(status){ // Sätt till inloggad
+	public void setLoggedIn(boolean status) {
+		if (status) { // Sätt till inloggad
 			btnLoggaInButton.setText("Logga ut");
 			kundPanel.remove(btnRegistreraButton); // Ta bort regisrera knappen
 			btnBetygsatt.setEnabled(true);
@@ -82,27 +107,60 @@ public class HuvudFrame extends JFrame {
 			btnBetygsatt.setEnabled(false);
 		}
 	}
-	
-	
-	public void updateVaraDetaljer(String[] varaDetaljArray){
+
+	/**
+	 * Uppdatera varadetaljerna
+	 * 
+	 * @param varaDetaljArray
+	 *            vara-detaljerna
+	 */
+	public void setVaraDetaljer(String[] varaDetaljArray) {
 		varaDetaljPanel.setVaraDetaljer(varaDetaljArray);
 	}
-	
+
+	/**
+	 * Uppdatera vara-listan
+	 * 
+	 * @param varaListlistan
+	 */
 	public void setVaraLista(String[] varaList) {
 		DefaultComboBoxModel model = new DefaultComboBoxModel(varaList);
 		this.varaList.setModel(model);
 	}
 
+	/**
+	 * Hämta kategorin som är vald i listan
+	 * 
+	 * @return valda kategorin
+	 */
 	public int getCurrentlySelectedKategori() {
 		return kategoriList.getSelectedIndex();
 	}
 
+	/**
+	 * Hämta valda vara i listan
+	 * 
+	 * @return valda varan i listan
+	 */
 	public int getCurrentlySelectedVara() {
 		return varaList.getSelectedIndex();
 	}
 
+	/**
+	 * Privat klass för kundpanelen som innehåller Logga in, logga ut och
+	 * registrera knapparna
+	 * 
+	 * @author Prince
+	 *
+	 */
 	private class KundPanel extends JPanel {
 
+		/**
+		 * Konstruktor som startar användargränssnittet
+		 * 
+		 * @param al
+		 *            ActionListener för knapparna
+		 */
 		public KundPanel(ActionListener al) {
 			setSize(400, 50);
 
@@ -110,7 +168,7 @@ public class HuvudFrame extends JFrame {
 			TitledBorder title;
 			title = BorderFactory.createTitledBorder("Kund panelen");
 			setBorder(title);
-			
+
 			// Logga in button
 			btnLoggaInButton = new JButton("Logga in");
 			btnLoggaInButton.addActionListener(al);
@@ -123,8 +181,22 @@ public class HuvudFrame extends JFrame {
 		}
 	}
 
+	/**
+	 * Användargränssnittet för kategori-panelen
+	 * 
+	 * @author Prince
+	 *
+	 */
 	private class KategoriPanel extends JPanel {
 
+		/**
+		 * Konstruktor som startar användargränssnittet
+		 * 
+		 * @param kategoriNamnArray
+		 *            kategorierna som ska listas upp
+		 * @param il
+		 *            ItemListener för listan
+		 */
 		public KategoriPanel(String[] kategoriNamnArray, ItemListener il) {
 			setSize(400, 50);
 
@@ -142,8 +214,22 @@ public class HuvudFrame extends JFrame {
 		}
 	}
 
+	/**
+	 * Användargränssnittet för listan över varorna
+	 * 
+	 * @author Prince
+	 *
+	 */
 	private class VaraPanel extends JPanel {
 
+		/**
+		 * Användargränssnittet för listan över varorna
+		 * 
+		 * @param varaNamnArray
+		 *            varorna som ska listas upp
+		 * @param il
+		 *            ItemListener för vara-listan
+		 */
 		public VaraPanel(String[] varaNamnArray, ItemListener il) {
 			setSize(400, 50);
 
@@ -160,13 +246,25 @@ public class HuvudFrame extends JFrame {
 		}
 	}
 
+	/**
+	 * Användargränssnittet för att visa detaljerna över en vara
+	 * 
+	 * @author Prince
+	 *
+	 */
 	private class VaraDetaljPanel extends JPanel {
 		private String varaNamn;
 		private float antal, pris;
 		private int gillaBetyg, oGillaBetyg;
 		private JTextPane varuTitle, varuPris, varuLager, varuBetyg;
 		private GridBagConstraints c;
-		
+
+		/**
+		 * Användargränssnittet över detaljerna över en vara
+		 * 
+		 * @param varaDetaljArray
+		 * @param al
+		 */
 		public VaraDetaljPanel(String[] varaDetaljArray, ActionListener al) {
 			// Title border
 			TitledBorder title;
@@ -235,7 +333,12 @@ public class HuvudFrame extends JFrame {
 			// Parsa information från arrayen
 			setVaraDetaljer(varaDetaljArray);
 		}
-		
+
+		/**
+		 * Metod för att updatera användargränssnittet med nya detaljer
+		 * 
+		 * @param varaDetaljArray
+		 */
 		public void setVaraDetaljer(String[] varaDetaljArray) {
 			varaNamn = varaDetaljArray[0];
 			gillaBetyg = Integer.parseInt(varaDetaljArray[1]);
@@ -248,7 +351,8 @@ public class HuvudFrame extends JFrame {
 			varuLager.setText("Lager: " + String.valueOf(antal) + " st");
 			DecimalFormat df = new DecimalFormat("0.00");
 			df.setMaximumFractionDigits(2);
-			varuBetyg.setText("Medelbetyg: " + df.format(((float)gillaBetyg/(float)(gillaBetyg+oGillaBetyg))) + " Gillar: " + gillaBetyg + ", Ogillar: " + oGillaBetyg);
+			varuBetyg.setText("Medelbetyg: " + df.format(((float) gillaBetyg / (float) (gillaBetyg + oGillaBetyg)))
+			+ " Gillar: " + gillaBetyg + ", Ogillar: " + oGillaBetyg);
 		}
 	}
 }

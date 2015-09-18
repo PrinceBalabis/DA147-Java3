@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="addBetygsattningToDatabase" key="selection"/>
+		<item value="setVaraLista" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="setVaraLista"/>
+			<item value="getVaraNamn"/>
+			<item value="getVaradetaljer"/>
+			<item value="getVaraDetaljer"/>
 			<item value="addBetygsattningToDatabase"/>
 			<item value="HuvudFrame"/>
 			<item value="varaChosen"/>
 			<item value="varaID"/>
-			<item value="getVaradetaljer"/>
-			<item value="srtgdrghdrthdrtghdrghdfghdfgh"/>
-			<item value="currentVaraChosen"/>
-			<item value="setVaraDetaljer"/>
 		</list>
 		<list key="replacehistory">
 			<item value="databasKomKontroller"/>

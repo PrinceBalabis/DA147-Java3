@@ -5,11 +5,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -21,11 +19,23 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.text.NumberFormatter;
 
+/**
+ * Användargränssnittet för registrering
+ * 
+ * @author Prince
+ *
+ */
 public class RegistreringsFrame extends JFrame {
 
 	JTextField tfNamn, tfAdress, tfAnvandarnamn, tfPersonnummer, tfTelefonnummer;
 	JPasswordField pfLosenord;
 
+	/**
+	 * Konstruktor som startar användargränssnittet för registrering
+	 * 
+	 * @param al
+	 *            ActionListener för registrera-knappen
+	 */
 	public RegistreringsFrame(ActionListener al) {
 		super("Registrering");
 		setSize(400, 270);
@@ -47,6 +57,11 @@ public class RegistreringsFrame extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Hämta all information skriven i text-rutorna
+	 * 
+	 * @return All information skriven i textrutorna
+	 */
 	public String[] getFormFields() {
 		String namn = tfNamn.getText();
 		String personnummer = tfPersonnummer.getText();
@@ -54,7 +69,8 @@ public class RegistreringsFrame extends JFrame {
 		String telefonnummer = tfTelefonnummer.getText();
 		String anvandarnamn = tfAnvandarnamn.getText();
 		String losenord = pfLosenord.getText();
-		String[] tempFormFieldArray = { "0" }; // Denna returneras om ett eller flera av fälten är ogiltiga
+		String[] tempFormFieldArray = { "0" }; // Denna returneras om ett eller
+		// flera av fälten är ogiltiga
 
 		Pattern p = Pattern.compile("[0-9]", Pattern.CASE_INSENSITIVE);
 		// Kolla om personumret stämmer
@@ -73,30 +89,35 @@ public class RegistreringsFrame extends JFrame {
 			return tempFormFieldArray;
 		}
 
-		//Kolla så att alla fält är fyllda
-		if(namn.length() == 0){
+		// Kolla så att alla fält är fyllda
+		if (namn.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Namn fältet är tomt!");
 			return tempFormFieldArray;
-		} else if(adress.length() == 0){
+		} else if (adress.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Adress fältet är tomt");
 			return tempFormFieldArray;
-		} else if(telefonnummer.length() == 0){
+		} else if (telefonnummer.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Telefonnummer fältet är tomt");
 			return tempFormFieldArray;
-		} else if(anvandarnamn.length() == 0){
+		} else if (anvandarnamn.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Anvandarnamn fältet är tomt");
 			return tempFormFieldArray;
-		} else if(losenord.length() == 0){
+		} else if (losenord.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Lösenord fältet är tomt");
 			return tempFormFieldArray;
 		}
-		
+
 		// Om alla fält stämmer då skickar vi fälten tillbaka
-		String[] tempFinalFormFieldArray = { "1", namn, personnummer, adress,
-				telefonnummer, anvandarnamn, losenord };
+		String[] tempFinalFormFieldArray = { "1", namn, personnummer, adress, telefonnummer, anvandarnamn, losenord };
 		return tempFinalFormFieldArray;
 	}
 
+	/**
+	 * Användargränssnittet för registreringen
+	 * 
+	 * @author Prince
+	 *
+	 */
 	private class KundRegistreringsPanel extends JPanel {
 		NumberFormatter formatter;
 

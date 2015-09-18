@@ -11,8 +11,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import model.DatabasModell;
-import model.Kund;
 
+/**
+ * Hanterar kommunikationen mellan HuvudController och databasen
+ * 
+ * @author Prince
+ *
+ */
 public class DatabasKomController {
 
 	private DatabasModell databasModell;
@@ -21,6 +26,9 @@ public class DatabasKomController {
 	private String user = "da147a_project_u";
 	private String password = "da147a_project_p";
 
+	/**
+	 * Konstruktor som hämtar all information nödvändig från databasen
+	 */
 	public DatabasKomController() {
 		System.out.println("Startade DatabasKomController");
 
@@ -35,33 +43,79 @@ public class DatabasKomController {
 		getVaraFromDatabase();
 	}
 
-	public int getVaraID(String VaraNamn){
+	/**
+	 * Hämtar varaID genom att söka med varans namn
+	 * 
+	 * @param VaraNamn
+	 *            Varans namn
+	 * @return varaID
+	 */
+	public int getVaraID(String VaraNamn) {
 		return databasModell.getVaraID(VaraNamn);
 	}
-	
+
+	/**
+	 * Hämta namnen på kategorierna
+	 * 
+	 * @return kategori-namnen
+	 */
 	public String[] getKategoriNamn() {
 		return databasModell.getKategoriNamn();
 	}
 
+	/**
+	 * Hämta namn på varorna i en kategori genom att söka på kategorins ID
+	 * 
+	 * @param kategoriID
+	 *            kategorins ID
+	 * @return namnen
+	 */
 	public String[] getVaraNamn(int kategoriID) {
 		return databasModell.getVaraNamn(kategoriID);
 	}
 
+	/**
+	 * Hämta namn på varorna i en kategori genom att söka på kategorins namn
+	 * 
+	 * @param kategoriNamn
+	 *            kategorins namn
+	 * @return namnen
+	 */
 	public String[] getVaraNamn(String kategoriNamn) {
 		return databasModell.getVaraNamn(kategoriNamn);
 	}
 
+	/**
+	 * Hämta varans detaljer genom att söka på varans ID
+	 * 
+	 * @param varaID
+	 *            varans ID
+	 * @return vara-detaljer
+	 */
 	public String[] getVaraDetaljer(int varaID) {
 		return databasModell.getVaradetaljer(varaID);
 	}
 
+	/**
+	 * Hämta varans detaljer genom att söka på varans namn
+	 * 
+	 * @param varaNamn
+	 *            varans namn
+	 * @return vara-detaljer
+	 */
 	public String[] getVaraDetaljer(String varaNamn) {
 		return databasModell.getVaradetaljer(varaNamn);
 	}
 
+	/**
+	 * Uppdaterar databasen med en ny betygsättning
+	 * 
+	 * @param varaID
+	 *            ID på varan
+	 * @param gillaStatus
+	 *            true om det är en gillning, false om det är en ogillning
+	 */
 	public void addBetygsattningToDatabase(int varaID, boolean gillaStatus) {
-
-		ResultSet rs = null;
 		Connection con = null;
 		Statement st = null;
 
@@ -70,23 +124,23 @@ public class DatabasKomController {
 			st = con.createStatement();
 
 			int antal;
-			if(gillaStatus){ // om knappen gilla trycktes så uppdatera gilla-betyget
+			if (gillaStatus) { // om knappen gilla trycktes så uppdatera
+				// gilla-betyget
 				System.out.println("Lägger till en gillning i databasen");
-				//Hämta nuvarande betygsättning och lägg till en gilning
+				// Hämta nuvarande betygsättning och lägg till en gilning
 				antal = Integer.parseInt(databasModell.getVaradetaljer(varaID)[1]);
 				antal++;
 				// Lägg till betygsättning i databasen!
-				st.executeUpdate(
-						"UPDATE `da147a_project`.`Vara` SET `gillaBetyg` = '" + antal + "' WHERE `Vara`.`varuID` = " + varaID + ";");
+				st.executeUpdate("UPDATE `da147a_project`.`Vara` SET `gillaBetyg` = '" + antal
+						+ "' WHERE `Vara`.`varuID` = " + varaID + ";");
 			} else {// om knappen ogilla trycktes så uppdatera ogilla-betyget
 				System.out.println("Lägger till en ogillning i databasen");
 				antal = Integer.parseInt(databasModell.getVaradetaljer(varaID)[2]);
 				antal++;
 				// Lägg till betygsättning i databasen!
-				st.executeUpdate(
-						"UPDATE `da147a_project`.`Vara` SET `oGillaBetyg` = '" + antal + "' WHERE `Vara`.`varuID` = " + varaID + ";");
+				st.executeUpdate("UPDATE `da147a_project`.`Vara` SET `oGillaBetyg` = '" + antal
+						+ "' WHERE `Vara`.`varuID` = " + varaID + ";");
 			}
-
 
 		} catch (SQLException ex) {
 			Logger lgr = Logger.getLogger(DatabasKomController.class.getName());
@@ -108,10 +162,20 @@ public class DatabasKomController {
 		}
 
 		databasModell.resetVaraList(); // Ta bort lokal information om varor
-		getVaraFromDatabase(); // Uppdatera lokal information med det nya från databasen
+		getVaraFromDatabase(); // Uppdatera lokal information med det nya från
+		// databasen
 	}
 
-	public boolean loggaInKund(String anvandarnamn, String losenord){
+	/**
+	 * Testar om inloggningsuppgifterna stämmer
+	 * 
+	 * @param anvandarnamn
+	 *            användarnamn skriven i användargränssnittet
+	 * @param losenord
+	 *            lösenord skriven i användargränssnittet
+	 * @return true om inloggningsuppgifterna stämmer, false om det inte gör
+	 */
+	public boolean loggaInKund(String anvandarnamn, String losenord) {
 		boolean loginSuccessful = false;
 		ResultSet rs = null;
 		Connection con = null;
@@ -125,7 +189,7 @@ public class DatabasKomController {
 			rs = st.executeQuery("SELECT * FROM `Kund` WHERE `anvandarnamn` LIKE '" + anvandarnamn + "'");
 			if (rs.next()) {
 				System.out.println("Användarnamn existerar i databasen!");
-				if(rs.getString("losenord").equals(losenord)){
+				if (rs.getString("losenord").equals(losenord)) {
 					loginSuccessful = true;
 				} else {
 					System.out.println("Lösenord är fel!!");
@@ -158,13 +222,14 @@ public class DatabasKomController {
 		}
 
 		// Kom ihåg vilken kund som är inloggad genom att spara anvandarnamnet
-		//currentlyLoggedInKund = anvandarnamn;
+		// currentlyLoggedInKund = anvandarnamn;
 
 		return loginSuccessful;
 	}
 
 	/**
-	 * Kallas för att registrera ny kund kolla om användaren inte redan existerar
+	 * Kallas för att registrera ny kund kolla om användaren inte redan
+	 * existerar
 	 * 
 	 * @return true om kunden lyckades registrera, false om personnumret eller
 	 *         användarnamnet redan existerar!
