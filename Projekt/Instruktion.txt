@@ -1,0 +1,2 @@
+För att kunna kompilera källkodsfilerna, så importerar du projektet i Eclipse.
+Öppna upp main.java och kör programmet
